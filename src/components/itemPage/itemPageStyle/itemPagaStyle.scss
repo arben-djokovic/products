@@ -5,7 +5,7 @@
 
 .star-ratings {
     color: #ccc;
-    font-size: 64px;
+    font-size: 60px;
     position: relative;
     margin: 0;
     padding: 0;
@@ -18,7 +18,6 @@
       top: 0;
       left: 0;
       overflow: hidden;
-      
       // Allows us to grab the width of the span elements
       span {
         display: inline-block;
@@ -28,5 +27,117 @@
       padding: 0;
       display: block;
       z-index: 0;
+    }
+  }
+  .content{
+    display: flex;
+    justify-content: space-around;
+    // text-align: center;
+    .swiperDiv{
+        width: 35vw;
+        max-width: 700px;
+        .mySwiper2 .swiper-wrapper .swiper-slide,.mySwiper2 .swiper-wrapper .swiper-slide-active{
+            display: flex;
+            align-items: center;
+            background-color: rgb(209, 209, 209);
+            height: 500px;
+        }
+        img{
+            max-width: 700px;
+            width: 35vw;
+        }
+        .mySwiper {
+            text-align: center;
+            img{
+                max-height: 150px;
+                height: 10vw;
+                width: auto;
+                &:hover{
+                    cursor: pointer;
+                    opacity: .8;
+                }
+            }
+        }
+    }
+    .right{
+        width: 40vw;
+        font-size: 20px;
+        .priceDiv{
+            display: flex;
+            grid-gap: 50px;
+            margin: 20px 0;
+            align-items: center;
+            .price{
+                font-weight: bold;
+                font-size: 20px;
+            }
+            .stock{
+                font-size: 16px;
+            }
+        }
+        .ratingText{
+            margin-top: 50px;
+            font-size: 15px;
+        }
+        .description{
+            margin: 50px 0;
+        }
+    }
+    .buttons{
+        display: flex;
+        grid-gap: 50px;
+        button{
+            padding: 10px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            background-color: transparent;
+        }
+        .editBtn{
+            color: #e7711b;
+            &:hover{
+                color: black;
+            }
+        }
+        .deleteBtn{
+            background-color: red;
+            color: white;
+            &:hover{
+                opacity: 0.5;
+            }
+        }
+    }
+  }
+
+  @media only screen and (max-width: 700px) {
+    .content{
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        grid-gap: 100px;
+        .swiperDiv{
+            width: 90vw;
+            img{
+                width: unset;
+            }
+            .mySwiper2 .swiper-wrapper .swiper-slide, .content .swiperDiv .mySwiper2 .swiper-wrapper .swiper-slide-active {
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+        }
+        img{
+            max-width: 700px;
+            width: 35vw;
+        }
+        .mySwiper {
+            img{
+                max-height: unset;
+                height: unset;
+                width: 100%;
+            }
+        }
+        .right{
+            width: 80vw;
+        }
     }
   }

@@ -4,7 +4,7 @@
 
 .star-ratings {
   color: #ccc;
-  font-size: 64px;
+  font-size: 60px;
   position: relative;
   margin: 0;
   padding: 0;
@@ -26,4 +26,114 @@
   padding: 0;
   display: block;
   z-index: 0;
+}
+
+.content {
+  display: flex;
+  justify-content: space-around;
+}
+.content .swiperDiv {
+  width: 35vw;
+  max-width: 700px;
+}
+.content .swiperDiv .mySwiper2 .swiper-wrapper .swiper-slide, .content .swiperDiv .mySwiper2 .swiper-wrapper .swiper-slide-active {
+  display: flex;
+  align-items: center;
+  background-color: rgb(209, 209, 209);
+  height: 500px;
+}
+.content .swiperDiv img {
+  max-width: 700px;
+  width: 35vw;
+}
+.content .swiperDiv .mySwiper {
+  text-align: center;
+}
+.content .swiperDiv .mySwiper img {
+  max-height: 150px;
+  height: 10vw;
+  width: auto;
+}
+.content .swiperDiv .mySwiper img:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.content .right {
+  width: 40vw;
+  font-size: 20px;
+}
+.content .right .priceDiv {
+  display: flex;
+  grid-gap: 50px;
+  margin: 20px 0;
+  align-items: center;
+}
+.content .right .priceDiv .price {
+  font-weight: bold;
+  font-size: 20px;
+}
+.content .right .priceDiv .stock {
+  font-size: 16px;
+}
+.content .right .ratingText {
+  margin-top: 50px;
+  font-size: 15px;
+}
+.content .right .description {
+  margin: 50px 0;
+}
+.content .buttons {
+  display: flex;
+  grid-gap: 50px;
+}
+.content .buttons button {
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  border: none;
+  background-color: transparent;
+}
+.content .buttons .editBtn {
+  color: #e7711b;
+}
+.content .buttons .editBtn:hover {
+  color: black;
+}
+.content .buttons .deleteBtn {
+  background-color: red;
+  color: white;
+}
+.content .buttons .deleteBtn:hover {
+  opacity: 0.5;
+}
+
+@media only screen and (max-width: 700px) {
+  .content {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    grid-gap: 100px;
+  }
+  .content .swiperDiv {
+    width: 90vw;
+  }
+  .content .swiperDiv img {
+    width: unset;
+  }
+  .content .swiperDiv .mySwiper2 .swiper-wrapper .swiper-slide, .content .swiperDiv .content .swiperDiv .mySwiper2 .swiper-wrapper .swiper-slide-active {
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  .content img {
+    max-width: 700px;
+    width: 35vw;
+  }
+  .content .mySwiper img {
+    max-height: unset;
+    height: unset;
+    width: 100%;
+  }
+  .content .right {
+    width: 80vw;
+  }
 }/*# sourceMappingURL=itemPagaStyle.css.map */
