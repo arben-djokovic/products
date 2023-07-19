@@ -36,7 +36,7 @@ export default function Home() {
         <br />
         <div className='items'>{(items.length > 0) ? items.map((item, i) => {
             if(i+1 <= maxNo){
-                return(<Link to={'/item/'+item.id} ><div className='item' key={i}>
+                return(<Link key={i} to={'/item/'+item.id} ><div className='item'>
                     <img src={item.thumbnail} alt="thumbnail" />
                     <div className="text">
                         <h2 className='title'>{item.title}</h2>

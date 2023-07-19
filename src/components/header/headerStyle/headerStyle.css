@@ -1,0 +1,22 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  background-color: black;
+  padding: 20px;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-gap: 10vw;
+}
+.header .link {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+.header .linkSelected {
+  -webkit-text-decoration: underline 3px rgb(255, 166, 0);
+          text-decoration: underline 3px rgb(255, 166, 0);
+}/*# sourceMappingURL=headerStyle.css.map */

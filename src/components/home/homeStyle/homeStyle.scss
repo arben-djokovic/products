@@ -1,8 +1,7 @@
-.home{
-}
+
 .loadMore{
     cursor: pointer;
-    color: red;
+    color: rgb(247, 142, 5);
     font-weight: bold;
     font-size: 20px;
     &:hover{
@@ -16,25 +15,49 @@
 }
 .items{
     text-align: center;
+    margin: 100px 0 0 0;
 }
 .loadMore{
     text-align: center;
     margin: 20px;
+    margin-bottom: 50px;
 }
 .item{
-    margin: 10px 20px;
-    width: 200px;
-    height: 280px;
+    margin: 1vw;
+    width: 180px;
+    height: 300px;
     display: inline-block;
     background-color: rgb(220, 220, 220);
+    border: 1px solid transparent;
     .text{
-        height: 100px;
+        height: 130px;
         display: flex;
         justify-content: space-between;
         flex-direction: column;
+        padding: 10px;
+        .price{
+            color: black;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .title{
+            font-size: 20px;
+        }
     }
     img{
-        width: 200px;
+        width: 180px;
         height: 150px;
     }
+    &:hover{
+        border: 1px solid rgb(247, 142, 5);
+    }
 }
+
+@media only screen and (max-width: 380px) {
+   .items{
+        .item{
+            margin: 10px 0;
+            // width: 220px;
+        }
+   }
+  }
