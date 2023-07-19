@@ -1,0 +1,40 @@
+.home{
+}
+.loadMore{
+    cursor: pointer;
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+    &:hover{
+        opacity: .8;
+    }
+}
+.loadingImg{
+    margin-left: 50vw;
+    transform: translate(-50%, 0);
+    width: 100px;
+}
+.items{
+    text-align: center;
+}
+.loadMore{
+    text-align: center;
+    margin: 20px;
+}
+.item{
+    margin: 10px 20px;
+    width: 200px;
+    height: 280px;
+    display: inline-block;
+    background-color: rgb(220, 220, 220);
+    .text{
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+    img{
+        width: 200px;
+        height: 150px;
+    }
+}
