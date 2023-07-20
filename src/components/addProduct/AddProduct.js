@@ -76,6 +76,7 @@ export default function AddProduct() {
     navigate("/")
   }
   useEffect(() => {
+    window.scrollTo(0, 0);
     fetchCategories()
   }, [])
   return (
