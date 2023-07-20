@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "./itemPageStyle/itemPagaStyle.css"
-import { useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -14,15 +14,16 @@ export default function ItemPage() {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   let { id } = useParams();
   let [item, setItem] = useState({ rating: 1,images: [],thumbnail: "",title: "Loading...", price: 0 })
-  let dispatch = useDispatch()
   let items = useSelector(store => store.products);
+  let dispatch = useDispatch()
+  let navigate = useNavigate();
 
 
 
   let fetchFunction = () => {
     fetch('https://dummyjson.com/products/' + id)
       .then(res => res.json())
-      .then(res1 => { setItem(res1); console.log(res1) });
+      .then(res1 => { setItem(res1) });
   }
 
   let deleteItem = () => {
@@ -31,27 +32,23 @@ export default function ItemPage() {
       method: 'DELETE',
     })
     .then(res => res.json())
-    .then(console.log);
+    .then(console.log("deleted" + id));
 
 
     //Delete from redux
-    let newArray = items
-    items.forEach((element, i) => {
-      console.log(element.id)
-      if(element.id == item.id){
-        console.log("Izbrisano iz reduxa")
-        newArray = newArray.slice(i,1)
-      }
-    });
-    setTimeout(() => {
-      dispatch(productsAction(newArray))
-    }, 100);
+    dispatch(deleteProductAction(id))
+    navigate('/')
 
   }
 
   useEffect(() => {
-    console.log(items)
+    window.scrollTo(0, 0);
     fetchFunction()
+    if(items.length < 1){
+      fetch('https://dummyjson.com/products?limit=100')
+      .then(res => res.json())
+      .then(res1 => dispatch(productsAction(res1.products)));
+    }
   }, [])
   return (
     <div className='itemPage'>
@@ -115,7 +112,7 @@ export default function ItemPage() {
           <p className="description">{item.description}</p>
 
           <div className="buttons">
-            <button className='editBtn'>Edit item</button>
+            <Link to={"/edit/"+id} ><button className='editBtn'>Edit item</button></Link>
             <button className='deleteBtn' onClick={deleteItem}>Delete item</button>
           </div>
 

@@ -1,5 +1,5 @@
 .itemPage{
-    margin-top: 100px;
+    margin-top: 150px;
 }
 
 
@@ -110,6 +110,9 @@
   }
 
   @media only screen and (max-width: 700px) {
+    .itemPage{
+        margin: 200px 0px;
+    }
     .content{
         flex-direction: column;
         justify-content: center;
@@ -118,7 +121,7 @@
         .swiperDiv{
             width: 90vw;
             img{
-                width: unset;
+                width: 100%;
             }
             .mySwiper2 .swiper-wrapper .swiper-slide, .content .swiperDiv .mySwiper2 .swiper-wrapper .swiper-slide-active {
                 justify-content: center;

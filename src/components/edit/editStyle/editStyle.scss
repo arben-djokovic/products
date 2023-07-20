@@ -1,0 +1,95 @@
+.edit{
+    padding: 150px;
+    min-height: calc(100vh - 300px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(213, 213, 213, 0.3);
+    .container{
+        max-width: 80vw !important;
+        padding: 20px 50px;
+        width: 700px;
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6.3px);
+        border: 1px solid rgb(247, 142, 5);
+        display: flex;
+        flex-direction: column;
+        grid-gap: 30px;
+        h2{
+            text-align: center;
+        }
+        .inputs{
+            display: flex;
+            flex-direction: column;
+            grid-gap: 20px;
+            // align-items: center;
+            input, textarea{
+                padding: 5px;
+                border: 1px solid rgb(247, 142, 5);
+                width: 100%;
+                border-radius: 5px;
+                font-size: 20px;
+            }
+            
+            .images{
+                .imagesFlex{
+                    display: flex;
+                    grid-gap: 30px;
+                    overflow: auto;
+                    width: 90vw;
+                    max-width: 60vw;
+                    padding: 10px;
+                    align-items: center;
+                    text-align: center;
+                    .image{
+                        display: flex;
+                        flex-direction: column;
+                        grid-gap: 10px;
+                        img{
+                            height: 80px;
+                        }
+                        .remove{
+                            cursor: pointer;
+                            color: red;
+                            &:hover{
+                                opacity: .8;
+                                color: rgb(255, 110, 110);
+                            }
+                        }
+                    }
+                }
+            }
+            .addImage{
+                div{
+                    display: flex;
+                    flex-direction: column;
+                    grid-gap: 5px;
+                    button{
+                        width: 100px;
+                        padding: 5px 10px;
+                        background-color: rgb(247, 142, 5);
+                        color: white;
+                        border: none;
+                        border-radius: 5px;
+                    }
+                }
+            }
+        }
+        .submit{
+            padding: 15px;
+            background-color: rgb(247, 142, 5);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+    }
+}
+@media only screen and (max-width: 700px) {
+    .edit{
+        padding-top: 250px;
+        min-height: calc(100vh - 2400px);
+    }
+}

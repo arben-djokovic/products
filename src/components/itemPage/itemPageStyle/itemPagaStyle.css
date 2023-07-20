@@ -1,5 +1,5 @@
 .itemPage {
-  margin-top: 100px;
+  margin-top: 150px;
 }
 
 .star-ratings {
@@ -108,6 +108,9 @@
 }
 
 @media only screen and (max-width: 700px) {
+  .itemPage {
+    margin: 200px 0px;
+  }
   .content {
     flex-direction: column;
     justify-content: center;
@@ -118,7 +121,7 @@
     width: 90vw;
   }
   .content .swiperDiv img {
-    width: unset;
+    width: 100%;
   }
   .content .swiperDiv .mySwiper2 .swiper-wrapper .swiper-slide, .content .swiperDiv .content .swiperDiv .mySwiper2 .swiper-wrapper .swiper-slide-active {
     justify-content: center;

@@ -15,8 +15,12 @@ export default function Home() {
         .then(res => res.json())
         .then(res1 => dispatch(productsAction(res1.products)));
     }
-    useEffect(()=>{
+    if(items.length < 1){
         fetchFunction()
+    }
+    useEffect(()=>{
+        window.scrollTo(0, 0);
+        // fetchFunction()
     },[])
 
     let loadMore = () => {
@@ -26,7 +30,6 @@ export default function Home() {
 
   return (
     <div className='home'>
-        
         {/* <select name="select1" id="1">
             <option value="all">All</option>
             {categories.map(categorie => {
@@ -34,7 +37,10 @@ export default function Home() {
             })}
         </select> */}
         <br />
-        <div className='items'>{(items.length > 0) ? items.map((item, i) => {
+        <div className='items'>
+            <p style={{color: "black"}}>NAKON REFRESHA, PONOVO SE FETCHUJE IZ BASE PODATAKA, TAKO DA SE SVE PROMJENE (EDITOVANJE I BRISANJE) VRACA NA POCETNU VRIJEDNOST 
+            JER NEMAMO MOGUCNOST MIJENJANJA PODATAKA U BAZI STO ZNACI DA SE I U REDUXU ITEMS VRACAJU NA POCETNU VRIJEDNOST</p>
+            {(items.length > 0) ? items.map((item, i) => {
             if(i+1 <= maxNo){
                 return(<Link key={i} to={'/item/'+item.id} ><div className='item'>
                     <img src={item.thumbnail} alt="thumbnail" />

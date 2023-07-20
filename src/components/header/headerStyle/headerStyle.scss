@@ -19,3 +19,8 @@
         text-decoration: underline 3px  rgb(255, 166, 0);
     }
 }
+@media only screen and (max-width: 700px) {
+    .header{
+        flex-direction: column;
+    }
+}

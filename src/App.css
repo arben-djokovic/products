@@ -5,6 +5,7 @@
 body{
   font-family:Arial, Helvetica, sans-serif;
   background-color: #F1F3F4;
+  min-height: 100vh;
 }
 a, button{
   cursor: pointer;
@@ -13,4 +14,7 @@ a, button{
 }
 a:hover, button:hover{
   opacity: .8;
+}
+#root{
+  min-height: 100vh;
 }

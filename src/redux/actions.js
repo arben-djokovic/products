@@ -5,3 +5,9 @@ export var productsAction = (name) => {
         playload: name,
     }
 }
+export var deleteProductAction = (name) => {
+    return {
+        type: 'deleteProduct',
+        playload: name,
+    }
+}
