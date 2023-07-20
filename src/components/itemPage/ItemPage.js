@@ -21,14 +21,14 @@ export default function ItemPage() {
 
 
   let fetchFunction = () => {
-    fetch('https://dummyjson.com/products/' + id)
+    fetch(`https://dummyjson.com/products/${id}`)
       .then(res => res.json())
       .then(res1 => { setItem(res1) });
   }
 
   let deleteItem = () => {
     //Delete from base
-    fetch('https://dummyjson.com/products/' + id, {
+    fetch(`https://dummyjson.com/products/${id}`, {
       method: 'DELETE',
     })
       .then(res => res.json())
@@ -134,7 +134,7 @@ export default function ItemPage() {
           <p className="description">{item.description}</p>
 
           <div className="buttons">
-            <Link to={"/edit/" + id} ><button className='editBtn'>Edit item</button></Link>
+            <Link to={`/product/edit/${id}`} ><button className='editBtn'>Edit item</button></Link>
             <button className='deleteBtn' onClick={deleteItem}>Delete item</button>
           </div>
 

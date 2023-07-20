@@ -14,8 +14,9 @@ export default function Edit() {
   let navigate = useNavigate()
   let dispatch = useDispatch()
 
+  // not doing - explanation in useEffect
   let fetchFunction = () => {
-    fetch('https://dummyjson.com/products/' + id)
+    fetch(`https://dummyjson.com/products/${id}`)
       .then(res => res.json())
       .then(res1 => { setItem(res1); setAllImages(res1.images) });
   }
@@ -85,7 +86,7 @@ export default function Edit() {
     changedItem.images = filtered
     changedItem.id = id
 
-    fetch('https://dummyjson.com/products/' + id, {
+    fetch(`https://dummyjson.com/products/${id}`, {
       method: 'PUT', /* or PATCH */
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -103,7 +104,7 @@ export default function Edit() {
       .then(res => res.json())
 
     dispatch(editProductAction(changedItem))
-    navigate("/item/" + id)
+    navigate(`/product/${id}`)
 
   }
 
@@ -143,7 +144,7 @@ export default function Edit() {
         <h2>Edit item</h2>
         <div className="inputs">
           <div className="images">
-            <p>Remove images</p>
+            {allImages.length > 0 ? <p>Remove images</p> : <></>}
             <div className="imagesFlex">
               {allImages.map((image, i) => {
                 return (<div key={i} className='image'><img src={image} alt="image" /> <p onClick={(e) => {
@@ -179,15 +180,15 @@ export default function Edit() {
             <input onChange={changeItem} type="number" name="stock" defaultValue={item.stock} />
           </div>
           <div className="rating">
-            <p>rating</p>
+            <p>Rating</p>
             <input onChange={changeItem} max={5.0} min={0.0} type="number" name="rating" defaultValue={item.rating} />
           </div>
           <div className="brand">
-            <p>brand</p>
+            <p>Brand</p>
             <input onChange={changeItem} type="text" name="brand" defaultValue={item.brand} />
           </div>
           <div className="category">
-            <p>category</p>
+            <p>Category</p>
             <select onChange={changeItem} name="categories" id="categories">
               {categories.map((categorie, i) => {
                 if (categorie == item.category) {
@@ -203,7 +204,7 @@ export default function Edit() {
             </select>
           </div>
           <div className="description">
-            <p>description</p>
+            <p>Description</p>
             <textarea onChange={changeItem} name="description" id="description" defaultValue={item.description} cols="30" rows="10"></textarea>
           </div>
         </div>

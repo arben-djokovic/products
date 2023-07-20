@@ -18,7 +18,11 @@ export var products = (state = [], action) => {
         })
         stateEdited = state1
         return stateEdited
-    } else {
+    }else if(action.type == "addProduct"){
+        state1 = [...state1, {...action.playload, id: (state1.length + Math.floor(Math.random() * 100)) }]
+        return state1
+    }
+    else {
         return state
     }
 }

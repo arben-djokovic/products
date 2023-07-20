@@ -8,7 +8,7 @@ export default function Header({ page }) {
   return (
     <div className='header'>
       <Link to="/" className={(page == "home") ? 'link linkSelected' : 'link'}>Home</Link>
-      <Link to="/addProduct" className={(page == "addProduct") ? 'link linkSelected' : 'link'}>Add Product</Link>
+      <Link to="/product/add" className={(page == "addProduct") ? 'link linkSelected' : 'link'}>Add Product</Link>
     </div>
   )
 }

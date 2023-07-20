@@ -16,3 +16,9 @@ export var editProductAction = (name) => {
         playload: name,
     }
 }
+export var addProductAction = (name) => {
+    return {
+        type: 'addProduct',
+        playload: name,
+    }
+}

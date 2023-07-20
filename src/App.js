@@ -15,9 +15,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<><Header page={"home"} /><Home /></>} />
-          <Route path="/addProduct" element={<><Header page={"addProduct"} /><AddProduct /></>} />
-          <Route path="/item/:id" element={<><Header page={"item"} /><ItemPage /></>} />
-          <Route path="/edit/:id" element={<><Header page={"edit"} /><Edit /></>} />
+          <Route path="/product/add" element={<><Header page={"addProduct"} /><AddProduct /></>} />
+          <Route path="/product/:id" element={<><Header page={"item"} /><ItemPage /></>} />
+          <Route path="/product/edit/:id" element={<><Header page={"edit"} /><Edit /></>} />
         </Routes>
       </Router>
     </Provider>

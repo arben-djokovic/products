@@ -1,4 +1,4 @@
-.edit {
+.addProduct {
   padding: 150px;
   min-height: calc(100vh - 300px);
   display: flex;
@@ -7,7 +7,7 @@
   align-items: center;
   background: rgba(213, 213, 213, 0.3);
 }
-.edit .container {
+.addProduct .container {
   max-width: 80vw !important;
   padding: 20px 50px;
   width: 700px;
@@ -20,28 +20,28 @@
   flex-direction: column;
   grid-gap: 30px;
 }
-.edit .container h2 {
+.addProduct .container h2 {
   text-align: center;
 }
-.edit .container .inputs {
+.addProduct .container select {
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid rgb(247, 142, 5);
+  cursor: pointer;
+}
+.addProduct .container .inputs {
   display: flex;
   flex-direction: column;
   grid-gap: 20px;
 }
-.edit .container .inputs input, .edit .container .inputs textarea {
+.addProduct .container .inputs input, .addProduct .container .inputs textarea {
   padding: 5px;
   border: 1px solid rgb(247, 142, 5);
   width: 100%;
   border-radius: 5px;
   font-size: 20px;
 }
-.edit .container .inputs select {
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid rgb(247, 142, 5);
-  cursor: pointer;
-}
-.edit .container .inputs .images .imagesFlex {
+.addProduct .container .inputs .images .imagesFlex {
   display: flex;
   grid-gap: 30px;
   overflow: auto;
@@ -51,28 +51,28 @@
   text-align: center;
   max-width: 600px;
 }
-.edit .container .inputs .images .imagesFlex .image {
+.addProduct .container .inputs .images .imagesFlex .image {
   display: flex;
   flex-direction: column;
   grid-gap: 10px;
 }
-.edit .container .inputs .images .imagesFlex .image img {
+.addProduct .container .inputs .images .imagesFlex .image img {
   height: 80px;
 }
-.edit .container .inputs .images .imagesFlex .image .remove {
+.addProduct .container .inputs .images .imagesFlex .image .remove {
   cursor: pointer;
   color: red;
 }
-.edit .container .inputs .images .imagesFlex .image .remove:hover {
+.addProduct .container .inputs .images .imagesFlex .image .remove:hover {
   opacity: 0.8;
   color: rgb(255, 110, 110);
 }
-.edit .container .inputs .addImage div {
+.addProduct .container .inputs .addImage div {
   display: flex;
   flex-direction: column;
   grid-gap: 5px;
 }
-.edit .container .inputs .addImage div button {
+.addProduct .container .inputs .addImage div button {
   width: 100px;
   padding: 5px 10px;
   background-color: rgb(247, 142, 5);
@@ -80,7 +80,7 @@
   border: none;
   border-radius: 5px;
 }
-.edit .container .submit {
+.addProduct .container .submit {
   padding: 15px;
   background-color: rgb(247, 142, 5);
   color: white;
@@ -94,4 +94,4 @@
     padding-top: 250px;
     min-height: calc(100vh - 2400px);
   }
-}/*# sourceMappingURL=editStyle.css.map */
+}/*# sourceMappingURL=addProductStyle.css.map */

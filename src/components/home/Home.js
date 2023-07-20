@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { productsAction } from './../../redux/actions';
 import './homeStyle/homeStyle.css'
 import { Link, useNavigate, useParams } from 'react-router-dom';
+import ProductItem from '../ProductItem';
 
 export default function Home() {
     const navigate = useNavigate();
@@ -38,17 +39,9 @@ export default function Home() {
         </select> */}
             <br />
             <div className='items'>
-                <p style={{ color: "black" }}>NAKON REFRESHA, PONOVO SE FETCHUJE IZ BASE PODATAKA, TAKO DA SE SVE PROMJENE (EDITOVANJE I BRISANJE) VRACA NA POCETNU VRIJEDNOST
-                    JER NEMAMO MOGUCNOST MIJENJANJA PODATAKA U BAZI STO ZNACI DA SE I U REDUXU ITEMS VRACAJU NA POCETNU VRIJEDNOST</p>
                 {(items.length > 0) ? items.map((item, i) => {
                     if (i + 1 <= maxNo) {
-                        return (<Link key={i} to={'/item/' + item.id} ><div className='item'>
-                            <img src={item.thumbnail} alt="thumbnail" />
-                            <div className="text">
-                                <h2 className='title'>{item.title}</h2>
-                                <p className='price'>{item.price}$</p>
-                            </div>
-                        </div></Link>)
+                        return (<ProductItem key={i} item={item} />)
                     }
                 }) : <img className='loadingImg' src="./assets/loading-spinner.gif" alt="Loading..." />}
             </div>
