@@ -3,7 +3,7 @@ import './headerStyle/headerStyle.css'
 import { Link } from 'react-router-dom'
 
 
-export default function Header({page}) {
+export default function Header({ page }) {
 
   return (
     <div className='header'>

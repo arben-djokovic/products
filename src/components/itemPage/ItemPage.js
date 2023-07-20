@@ -13,7 +13,7 @@ import { deleteProductAction, productsAction } from '../../redux/actions';
 export default function ItemPage() {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   let { id } = useParams();
-  let [item, setItem] = useState({ rating: 1,images: [],thumbnail: "",title: "Loading...", price: 0 })
+  let [item, setItem] = useState({ rating: 1, images: [], thumbnail: "", title: "Loading...", price: 0 })
   let items = useSelector(store => store.products);
   let dispatch = useDispatch()
   let navigate = useNavigate();
@@ -28,11 +28,10 @@ export default function ItemPage() {
 
   let deleteItem = () => {
     //Delete from base
-    fetch('https://dummyjson.com/products/'+id, {
+    fetch('https://dummyjson.com/products/' + id, {
       method: 'DELETE',
     })
-    .then(res => res.json())
-    .then(console.log("deleted" + id));
+      .then(res => res.json())
 
 
     //Delete from redux
@@ -43,51 +42,74 @@ export default function ItemPage() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    fetchFunction()
-    if(items.length < 1){
+
+    // This is working - fetching from base, but i will get this data from redux because 
+    // we maybe changed one item then when we fetch item will be the same like before changing.
+
+
+
+    if (items.length < 10) {
       fetch('https://dummyjson.com/products?limit=100')
-      .then(res => res.json())
-      .then(res1 => dispatch(productsAction(res1.products)));
+        .then(res => res.json())
+        .then(res1 => dispatch(productsAction(res1.products)));
     }
+
+    items.forEach(element => {
+      if (element.id == id) {
+        setItem(element)
+      }
+    });
+
+    setTimeout(() => {
+      if (item.description == undefined && items.length < 2) {
+        fetchFunction()
+      }
+    }, 100);
   }, [])
   return (
     <div className='itemPage'>
       <div className="content">
         <div className="swiperDiv">
-        <Swiper
-          style={{
-            '--swiper-navigation-color': '#fff',
-            '--swiper-pagination-color': '#fff',
-          }}
-          loop={true}
-          spaceBetween={10}
-          navigation={true}
-          thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
-          modules={[FreeMode, Navigation, Thumbs]}
-          className="mySwiper2"
-        >
-          {item.images.map((imageItem, i) => {
-          return(<SwiperSlide key={i}>
-            <img src={imageItem} alt="imageItem" />
-          </SwiperSlide>)
-          })}
-        </Swiper>
-        <Swiper
-          onSwiper={setThumbsSwiper}
-          loop={true}
-          spaceBetween={10}
-          slidesPerView={4}
-          freeMode={true}
-          watchSlidesProgress={true}
-          modules={[FreeMode, Navigation, Thumbs]}
-          className="mySwiper"
-        >
-          {item.images.map((imageItem, i) => {
-          return(<SwiperSlide key={i}>
-            <img src={imageItem} alt="imageItem" />
-          </SwiperSlide>)
-          })}
-        </Swiper>
+          <Swiper
+            style={{
+              '--swiper-navigation-color': '#fff',
+              '--swiper-pagination-color': '#fff',
+            }}
+            loop={true}
+            spaceBetween={10}
+            navigation={true}
+            thumbs={{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }}
+            modules={[FreeMode, Navigation, Thumbs]}
+            className="mySwiper2"
+          >
+            <SwiperSlide>
+              <img src={item.thumbnail} alt="imageItem" />
+            </SwiperSlide>
+            {item.images.map((imageItem, i) => {
+              return (<SwiperSlide key={i}>
+                <img src={imageItem} alt="imageItem" />
+              </SwiperSlide>)
+            })}
+          </Swiper>
+          <Swiper
+            onSwiper={setThumbsSwiper}
+            loop={true}
+            spaceBetween={10}
+            slidesPerView={4}
+            freeMode={true}
+            watchSlidesProgress={true}
+            modules={[FreeMode, Navigation, Thumbs]}
+            className="mySwiper"
+          >
+            <SwiperSlide>
+              <img src={item.thumbnail} alt="imageItem" />
+            </SwiperSlide>
+            {item.images.map((imageItem, i) => {
+              return (<SwiperSlide key={i}>
+                <img src={imageItem} alt="imageItem" />
+              </SwiperSlide>)
+            })}
+          </Swiper>
         </div>
 
         <div className='right'>
@@ -112,7 +134,7 @@ export default function ItemPage() {
           <p className="description">{item.description}</p>
 
           <div className="buttons">
-            <Link to={"/edit/"+id} ><button className='editBtn'>Edit item</button></Link>
+            <Link to={"/edit/" + id} ><button className='editBtn'>Edit item</button></Link>
             <button className='deleteBtn' onClick={deleteItem}>Delete item</button>
           </div>
 

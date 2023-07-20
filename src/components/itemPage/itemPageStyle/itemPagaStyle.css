@@ -56,7 +56,6 @@
 }
 .content .swiperDiv .mySwiper img:hover {
   cursor: pointer;
-  opacity: 0.8;
 }
 .content .right {
   width: 40vw;
