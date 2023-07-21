@@ -1,11 +1,13 @@
 .addProduct{
-    padding: 150px;
+    padding: 150px 0;
+    max-width: 100vw;
     min-height: calc(100vh - 300px);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background: rgba(213, 213, 213, 0.3);
+    overflow-x: hidden;
     .container{
         max-width: 80vw !important;
         padding: 20px 50px;
@@ -94,7 +96,7 @@
     }
 }
 @media only screen and (max-width: 700px) {
-    .edit{
+    .addProduct{
         padding-top: 250px;
         min-height: calc(100vh - 2400px);
     }

@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: calc(100vw - 40px);
   background-color: black;
   padding: 20px;
   z-index: 2;

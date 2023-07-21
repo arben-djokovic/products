@@ -1,5 +1,6 @@
 .itemPage {
   margin-top: 150px;
+  overflow-x: hidden;
 }
 
 .star-ratings {
