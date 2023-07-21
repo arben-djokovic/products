@@ -70,17 +70,17 @@ export default function Edit() {
     });
       if (changedItem.thumbnail == undefined) {
         changedItem.thumbnail = item.thumbnail
-      }else if(changedItem.thumbnail.length == 0){
+      }else if(changedItem.thumbnail.replaceAll(" ", "").length == 0){
         checkGood = checkGood + '1'
       }
       if (changedItem.title == undefined) {
         changedItem.title = item.title
-      }else if(changedItem.title.length == 0){
+      }else if(changedItem.title.replaceAll(" ", "").length == 0){
         checkGood = checkGood + '1'
       }
       if (changedItem.price == undefined) {
         changedItem.price = item.price
-      }else if(changedItem.price.length == 0){
+      }else if(changedItem.price.replaceAll(" ", "").length == 0 || changedItem.price <= 0){
         checkGood = checkGood + '1'
       }
       if (changedItem.stock == undefined) {
@@ -132,21 +132,21 @@ export default function Edit() {
   let changeItem = (e) => {
     if (e.target.name == 'thumbnail') {
       changedItem.thumbnail = e.target.value
-      if(e.target.value.length == 0){
+      if(e.target.value.replaceAll(" ", "").length == 0){
         e.target.classList.add("errorInput")
       }else{
         e.target.classList.remove("errorInput")
       }
     } else if (e.target.name == 'title') {
       changedItem.title = e.target.value
-      if(e.target.value.length == 0){
+      if(e.target.value.replaceAll(" ", "").length == 0){
         e.target.classList.add("errorInput")
       }else{
         e.target.classList.remove("errorInput")
       }
     } else if (e.target.name == 'price') {
       changedItem.price = e.target.value
-      if(e.target.value.length == 0){
+      if(e.target.value.replaceAll(" ", "").length == 0 || e.target.value <= 0){
         e.target.classList.add("errorInput")
       }else{
         e.target.classList.remove("errorInput")

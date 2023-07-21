@@ -42,21 +42,21 @@ export default function AddProduct() {
   let changeItem = (e) => {
     if (e.target.name == 'thumbnail') {
       item.thumbnail = e.target.value
-      if(e.target.value.length == 0){
+      if(e.target.value.replaceAll(" ", "").length == 0){
         e.target.classList.add("errorInput")
       }else{
         e.target.classList.remove("errorInput")
       }
     } else if (e.target.name == 'title') {
       item.title = e.target.value
-      if(e.target.value.length == 0){
+      if(e.target.value.replaceAll(" ", "").length == 0){
         e.target.classList.add("errorInput")
       }else{
         e.target.classList.remove("errorInput")
       }
     } else if (e.target.name == 'price') {
       item.price = e.target.value
-      if(e.target.value.length == 0){
+      if(e.target.value.replaceAll(" ", "").length == 0  || item.price <= 0){
         e.target.classList.add("errorInput")
       }else{
         e.target.classList.remove("errorInput")
@@ -84,7 +84,16 @@ export default function AddProduct() {
 
   let saveChanges = () => {
 
-    if(item.title.length <= 0 || item.price.length <= 0 || item.thumbnail.length <= 0){
+    if(item.title.replaceAll(" ", "").length <= 0 || item.price.replaceAll(" ", "").length <= 0 || item.thumbnail.replaceAll(" ", "").length <= 0  || item.price <= 0){
+      if(item.title.replaceAll(" ", "").length <= 0){
+        document.querySelector(".title input").classList.add("errorInput")
+      }
+      if(item.price.replaceAll(" ", "").length <= 0  || item.price <= 0){
+        document.querySelector(".price input").classList.add("errorInput")
+      }
+      if(item.thumbnail.replaceAll(" ", "").length <= 0){
+        document.querySelector(".thumbnail input").classList.add("errorInput")
+      }
       toast.error("Title, thumbnail and price are required !! ")
     }else{
 
