@@ -9,6 +9,9 @@
   background: rgba(213, 213, 213, 0.3);
   overflow-x: hidden;
 }
+.edit .errorInput {
+  border: 3px solid red !important;
+}
 .edit .container {
   max-width: 80vw !important;
   padding: 20px 50px;

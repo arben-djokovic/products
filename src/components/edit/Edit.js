@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { editProductAction, productsAction } from '../../redux/actions';
 import './editStyle/editStyle.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function Edit() {
   let { id } = useParams();
@@ -39,87 +41,121 @@ export default function Edit() {
     // }
 
     fetchCategories()
-    if (items.length < 1) {
+    if (items.length == 0) {
       fetch('https://dummyjson.com/products?limit=100')
         .then(res => res.json())
-        .then(res1 => dispatch(productsAction(res1.products)));
+        .then(res1 => { dispatch(productsAction(res1.products)) });
     }
-
     items.forEach(element => {
       if (element.id == id) {
         setItem(element)
         setAllImages(element.images)
       }
     });
+
   }, [])
+  useEffect(() => {
+    items.forEach(element => {
+      if (element.id == id) {
+        setItem(element)
+        setAllImages(element.images)
+      }
+    });
+  }, [items])
 
   let saveChanges = () => {
+   let checkGood = ''
     var filtered = allImages.filter(function (el) {
       return el != null;
     });
+      if (changedItem.thumbnail == undefined) {
+        changedItem.thumbnail = item.thumbnail
+      }else if(changedItem.thumbnail.length == 0){
+        checkGood = checkGood + '1'
+      }
+      if (changedItem.title == undefined) {
+        changedItem.title = item.title
+      }else if(changedItem.title.length == 0){
+        checkGood = checkGood + '1'
+      }
+      if (changedItem.price == undefined) {
+        changedItem.price = item.price
+      }else if(changedItem.price.length == 0){
+        checkGood = checkGood + '1'
+      }
+      if (changedItem.stock == undefined) {
+        changedItem.stock = item.stock
+      }
+      if (changedItem.rating == undefined) {
+        changedItem.rating = item.rating
+      }
+      if (changedItem.brand == undefined) {
+        changedItem.brand = item.brand
+      }
+      if (changedItem.category == undefined) {
+        changedItem.category = item.category
+      }
+      if (changedItem.description == undefined) {
+        changedItem.description = item.description
+      }
+      changedItem.images = filtered
+      changedItem.id = id
 
+      if(checkGood.includes('1')){
+          toast.error("Title, thumbnail and price are required !!")
+      }else{
+        fetch(`https://dummyjson.com/products/${id}`, {
+          method: 'PUT', /* or PATCH */
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            title: changedItem.title,
+            thumbnail: changedItem.thumbnail,
+            price: changedItem.price,
+            stock: changedItem.stock,
+            rating: changedItem.rating,
+            images: changedItem.images,
+            brand: changedItem.brand,
+            category: changedItem.category,
+            description: changedItem.description,
+          })
+        })
+          .then(res => res.json())
+  
+        dispatch(editProductAction(changedItem))
+        navigate(`/product/${id}`)
+      }
 
-    if (changedItem.thumbnail == undefined) {
-      changedItem.thumbnail = item.thumbnail
-    }
-    if (changedItem.title == undefined) {
-      changedItem.title = item.title
-    }
-    if (changedItem.price == undefined) {
-      changedItem.price = item.price
-    }
-    if (changedItem.stock == undefined) {
-      changedItem.stock = item.stock
-    }
-    if (changedItem.rating == undefined) {
-      changedItem.rating = item.rating
-    }
-    if (changedItem.brand == undefined) {
-      changedItem.brand = item.brand
-    }
-    if (changedItem.category == undefined) {
-      changedItem.category = item.category
-    }
-    if (changedItem.description == undefined) {
-      changedItem.description = item.description
-    }
-    changedItem.images = filtered
-    changedItem.id = id
-
-    fetch(`https://dummyjson.com/products/${id}`, {
-      method: 'PUT', /* or PATCH */
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        title: changedItem.title,
-        thumbnail: changedItem.thumbnail,
-        price: changedItem.price,
-        stock: changedItem.stock,
-        rating: changedItem.rating,
-        images: changedItem.images,
-        brand: changedItem.brand,
-        category: changedItem.category,
-        description: changedItem.description,
-      })
-    })
-      .then(res => res.json())
-
-    dispatch(editProductAction(changedItem))
-    navigate(`/product/${id}`)
+    
 
   }
 
   let changeItem = (e) => {
     if (e.target.name == 'thumbnail') {
       changedItem.thumbnail = e.target.value
+      if(e.target.value.length == 0){
+        e.target.classList.add("errorInput")
+      }else{
+        e.target.classList.remove("errorInput")
+      }
     } else if (e.target.name == 'title') {
       changedItem.title = e.target.value
+      if(e.target.value.length == 0){
+        e.target.classList.add("errorInput")
+      }else{
+        e.target.classList.remove("errorInput")
+      }
     } else if (e.target.name == 'price') {
       changedItem.price = e.target.value
+      if(e.target.value.length == 0){
+        e.target.classList.add("errorInput")
+      }else{
+        e.target.classList.remove("errorInput")
+      }
     } else if (e.target.name == 'stock') {
       changedItem.stock = e.target.value
     } else if (e.target.name == 'rating') {
       if (e.target.value > 5 || e.target.value < 0) {
-        alert("Mora biti izmedju 0.0 i 5.0")
+        toast.warning("Mora biti izmedju 0.0 i 5.0")
         e.target.value = item.rating
       } else {
         changedItem.rating = e.target.value
@@ -140,6 +176,7 @@ export default function Edit() {
   }
   return (
     <div className='edit'>
+      <ToastContainer />
       <div className="container">
         <h2>Edit item</h2>
         <div className="inputs">
@@ -164,15 +201,15 @@ export default function Edit() {
             </div>
           </div>
           <div className="thumbnail">
-            <p>Thumbnail</p>
+            <p>Thumbnail*</p>
             <input onChange={changeItem} type="text" name="thumbnail" defaultValue={item.thumbnail} />
           </div>
           <div className="title">
-            <p>Title</p>
+            <p>Title*</p>
             <input onChange={changeItem} type="text" name="title" defaultValue={item.title} />
           </div>
           <div className="price">
-            <p>Price</p>
+            <p>Price*</p>
             <input onChange={changeItem} type="number" name="price" defaultValue={item.price} />
           </div>
           <div className="stock">

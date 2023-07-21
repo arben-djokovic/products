@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './addProductStyle/addProductStyle.css'
-import { addProductAction } from '../../redux/actions';
+import { addProductAction, productsAction } from '../../redux/actions';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function AddProduct() {
   // const { store } = useContext(ReactReduxContext)
@@ -10,6 +12,7 @@ export default function AddProduct() {
   let navigate = useNavigate()
   let [allImages, setAllImages] = useState([])
   let [categories, setCategories] = useState([])
+  let items = useSelector(store => store.products)
   let item = { images: [], thumbnail: "", title: "", description: "", rating: "", price: "", stock: "", brand: "", category: "" }
   let dispatch = useDispatch()
 
@@ -35,20 +38,34 @@ export default function AddProduct() {
       })
     })
       .then(res => res.json())
-      .then(console.log);
   }
   let changeItem = (e) => {
     if (e.target.name == 'thumbnail') {
       item.thumbnail = e.target.value
+      if(e.target.value.length == 0){
+        e.target.classList.add("errorInput")
+      }else{
+        e.target.classList.remove("errorInput")
+      }
     } else if (e.target.name == 'title') {
       item.title = e.target.value
+      if(e.target.value.length == 0){
+        e.target.classList.add("errorInput")
+      }else{
+        e.target.classList.remove("errorInput")
+      }
     } else if (e.target.name == 'price') {
       item.price = e.target.value
+      if(e.target.value.length == 0){
+        e.target.classList.add("errorInput")
+      }else{
+        e.target.classList.remove("errorInput")
+      }
     } else if (e.target.name == 'stock') {
       item.stock = e.target.value
     } else if (e.target.name == 'rating') {
       if (e.target.value > 5 || e.target.value < 0) {
-        alert("Mora biti izmedju 0.0 i 5.0")
+        toast.warning("Mora biti izmedju 0.0 i 5.0")
         e.target.value = item.rating
       } else {
         item.rating = e.target.value
@@ -63,24 +80,36 @@ export default function AddProduct() {
     } else if (e.target.name == 'categories') {
       item.category = e.target.value
     }
-    console.log(item)
   }
 
   let saveChanges = () => {
-    item.images = allImages.filter(function (el) {
-      return el != null;
-    });
-    fetchAddNewItem()
 
-    dispatch(addProductAction(item))
-    navigate("/")
+    if(item.title.length <= 0 || item.price.length <= 0 || item.thumbnail.length <= 0){
+      toast.error("Title, thumbnail and price are required !! ")
+    }else{
+
+      item.images = allImages.filter(function (el) {
+        return el != null;
+      });
+      fetchAddNewItem()
+  
+      dispatch(addProductAction(item))
+      toast.success("Adden new product")
+      navigate("/")
+    }
   }
   useEffect(() => {
     window.scrollTo(0, 0);
     fetchCategories()
+    if(items.length < 10){
+      fetch('https://dummyjson.com/products?limit=100')
+            .then(res => res.json())
+            .then(res1 => dispatch(productsAction(res1.products)));
+    }
   }, [])
   return (
     <div className='addProduct'>
+      <ToastContainer />
       <div className="container">
         <h2>Add new item</h2>
         <div className="inputs">
@@ -105,15 +134,15 @@ export default function AddProduct() {
             </div>
           </div>
           <div className="thumbnail">
-            <p>Thumbnail</p>
+            <p>Thumbnail*</p>
             <input onChange={changeItem} type="text" name="thumbnail" defaultValue={item.thumbnail} />
           </div>
           <div className="title">
-            <p>Title</p>
+            <p>Title*</p>
             <input onChange={changeItem} type="text" name="title" defaultValue={item.title} />
           </div>
           <div className="price">
-            <p>Price</p>
+            <p>Price*</p>
             <input onChange={changeItem} step=".01" type="number" name="price" defaultValue={item.price} />
           </div>
           <div className="stock">
